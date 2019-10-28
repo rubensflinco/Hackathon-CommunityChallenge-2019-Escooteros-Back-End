@@ -7,7 +7,7 @@ router.use(express.json())
 
 
 router.post('/autenticar', async (req, res) => {
-    let userFbID = res.body.userFbID;
+    let userFbID = req.body.userFbID;
     let responseFind;
     try {
         responseFind = await mongoose.model('Usuario').find({ userFbID });

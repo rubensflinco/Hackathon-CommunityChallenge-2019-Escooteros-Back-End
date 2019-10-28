@@ -10,10 +10,11 @@ router.use(express.json())
 router.post('/autenticar', async (req, res) => {
     let userFbID = req.body.userFbID;
     let responseFind = await mongoose.model('Usuario').find({ userFbID });
-
+    responseFind = responseFind[0];
     if (responseFind.userFbID == userFbID) {
         // Usario já criado no banco
         res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
+        return;
     } else {
         //  Usuario sem registro no banco
         try {
@@ -21,9 +22,11 @@ router.post('/autenticar', async (req, res) => {
             json.token = md5(Math.random());
             let response = await mongoose.model('Usuario').create(json);
             res.json({ 'mensagem': 'OK: Cadastro e login feito.', 'data': response, 'token': response.token });
+            return;
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
+            return;
         }
     }
 
@@ -72,9 +75,11 @@ router.put('/ponto', async (req, res) => {
         try {
             let token = res.body.token;
             responseFind = await mongoose.model('Usuario').find({ token });
+            responseFind = responseFind[0];
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
+            return;
         }
 
         switch (tipo) {
@@ -89,14 +94,16 @@ router.put('/ponto', async (req, res) => {
             default:
                 res.status(400);
                 res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': 'Passe um tipo certo!' });
-                break;
+                return;
         }
 
         let response = await mongoose.model('Usuario').update({ pontos });
         res.json({ 'mensagem': 'OK', 'data': response });
+        return;
     } catch (error) {
         res.status(400);
         res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
+        return;
     }
 });
 

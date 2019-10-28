@@ -14,7 +14,7 @@ router.post('/autenticar', async (req, res) => {
     if (responseFind.apelido) {
         // Usario já criado no banco
         if (responseFind.userFbID == userFbID) {
-            res.json({ 'mensagem': 'OK', 'data': responseFind, 'token': responseFind.token });
+            res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
         } else {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': 'Parece que o userFbID informado não é o mesmo do salvo no banco!' });
@@ -25,7 +25,7 @@ router.post('/autenticar', async (req, res) => {
             let json = req.body;
             json.token = md5(Math.random());
             let response = await mongoose.model('Usuario').create(json);
-            res.json({ 'mensagem': 'OK', 'data': response, 'token': response.token });
+            res.json({ 'mensagem': 'OK: Cadastro e login feito.', 'data': response, 'token': response.token });
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
@@ -37,7 +37,9 @@ router.post('/autenticar', async (req, res) => {
 
 router.post('/criar', async (req, res) => {
     try {
-        let response = await mongoose.model('Usuario').create(req.body);
+        let json = req.body;
+        json.token = md5(Math.random());
+        let response = await mongoose.model('Usuario').create(json);
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {
         res.status(400);

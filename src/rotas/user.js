@@ -69,12 +69,12 @@ router.get('/todos', async (req, res) => {
 
 router.put('/ponto', async (req, res) => {
     try {
+        let token = req.body.token;
         let tipo = req.body.tipo;
         let quantidade = req.body.quantidade;
         let pontos, responseFind;
 
         try {
-            let token = res.body.token;
             responseFind = await mongoose.model('Usuario').find({ token });
             responseFind = responseFind[0];
         } catch (error) {

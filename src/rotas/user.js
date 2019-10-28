@@ -69,7 +69,7 @@ router.get('/todos', async (req, res) => {
 
 router.put('/ponto', async (req, res) => {
     try {
-        let tipo = req.body.quantidade;
+        let tipo = req.body.tipo;
         let quantidade = req.body.quantidade;
         let pontos, responseFind;
 

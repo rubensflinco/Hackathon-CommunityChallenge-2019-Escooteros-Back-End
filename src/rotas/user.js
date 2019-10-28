@@ -47,8 +47,8 @@ router.post('/criar', async (req, res) => {
 
 router.get('/unico/:token', async (req, res) => {
     try {
-        let token = res.params.token;
-        let response = await mongoose.model('Usuario').find({ token });
+        let token = req.params.token;
+        let response = await mongoose.model('Usuario').find({ token: token });
         response = response[0];
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {

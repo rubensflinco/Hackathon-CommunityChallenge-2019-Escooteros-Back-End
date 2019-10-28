@@ -8,14 +8,7 @@ router.use(express.json())
 
 router.post('/autenticar', async (req, res) => {
     let userFbID = req.body.userFbID;
-    let responseFind;
-    try {
-        responseFind = await mongoose.model('Usuario').find({ userFbID });
-    } catch (error) {
-        res.status(400);
-        res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
-    }
-
+    let responseFind = await mongoose.model('Usuario').find({ userFbID });
 
     if (responseFind.apelido) {
         // Usario já criado no banco

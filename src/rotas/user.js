@@ -85,11 +85,11 @@ router.post('/ponto', async (req, res) => {
 
         switch (tipo) {
             case "somar":
-                pontos = (parseInt(quantidade) + parseInt(responseFind.pontos))
+                pontos = String(parseInt(responseFind.pontos) + parseInt(quantidade))
                 break;
 
             case "subtrair":
-                pontos = (parseInt(quantidade) - parseInt(responseFind.pontos))
+                pontos = String(parseInt(responseFind.pontos) - parseInt(quantidade))
                 break;
 
             default:

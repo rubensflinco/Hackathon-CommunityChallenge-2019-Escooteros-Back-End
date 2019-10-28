@@ -67,7 +67,7 @@ router.get('/todos', async (req, res) => {
     }
 });
 
-router.put('/ponto', async (req, res) => {
+router.post('/ponto', async (req, res) => {
     try {
         let token = req.body.token;
         let tipo = req.body.tipo;

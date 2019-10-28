@@ -1,3 +1,10 @@
 let config = {
-    bd_string: 'mongodb+srv://admin:admin@cluster0-c5suq.mongodb.net/test?retryWrites=true&w=majority'
+    mongodb: {
+        host: 'cluster0-c5suq.mongodb.net',
+        user: 'admin',
+        pass: 'admin',
+        collection: 'db'
+    }
 }
+
+module.exports = config;

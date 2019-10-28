@@ -99,7 +99,15 @@ router.post('/ponto', async (req, res) => {
         }
 
         let response = await mongoose.model('Usuario').update({ pontos });
-        res.json({ 'mensagem': 'OK', 'data': response });
+        try {
+            responseFind = await mongoose.model('Usuario').find({ token });
+            responseFind = responseFind[0];
+        } catch (error) {
+            res.status(400);
+            res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
+            return;
+        }
+        res.json({ 'mensagem': 'OK', 'data': responseFind, 'response': response });
         return;
     } catch (error) {
         res.status(400);

@@ -49,6 +49,7 @@ router.get('/unico/:token', async (req, res) => {
     try {
         let token = res.params.token;
         let response = await mongoose.model('Usuario').find({ token });
+        response = response[0];
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {
         res.status(400);

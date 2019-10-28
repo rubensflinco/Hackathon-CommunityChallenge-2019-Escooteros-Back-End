@@ -11,14 +11,9 @@ router.post('/autenticar', async (req, res) => {
     let userFbID = req.body.userFbID;
     let responseFind = await mongoose.model('Usuario').find({ userFbID });
 
-    if (responseFind.apelido) {
+    if (responseFind.userFbID == userFbID) {
         // Usario já criado no banco
-        if (responseFind.userFbID == userFbID) {
-            res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
-        } else {
-            res.status(400);
-            res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': 'Parece que o userFbID informado não é o mesmo do salvo no banco!' });
-        }
+        res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
     } else {
         //  Usuario sem registro no banco
         try {

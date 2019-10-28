@@ -2,6 +2,7 @@ const express = require('express')
 let connect = require('../functions/connect')
 const mongoose = require('mongoose')
 const router = express.Router()
+const md5 = require('md5');
 
 router.use(express.json())
 
@@ -24,7 +25,7 @@ router.post('/autenticar', async (req, res) => {
             let json = req.body;
             json.token = md5(Math.random());
             let response = await mongoose.model('Usuario').create(json);
-            res.json({ 'mensagem': 'OK', 'data': response,  'token': response.token });
+            res.json({ 'mensagem': 'OK', 'data': response, 'token': response.token });
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
@@ -81,11 +82,11 @@ router.put('/ponto', async (req, res) => {
 
         switch (tipo) {
             case "somar":
-                pontos = ( parseInt(quantidade) + parseInt(responseFind.pontos) )
+                pontos = (parseInt(quantidade) + parseInt(responseFind.pontos))
                 break;
 
             case "subtrair":
-                pontos =  ( parseInt(quantidade) - parseInt(responseFind.pontos) )
+                pontos = (parseInt(quantidade) - parseInt(responseFind.pontos))
                 break;
 
             default:

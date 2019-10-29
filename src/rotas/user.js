@@ -59,7 +59,13 @@ router.get('/unico/:token', async (req, res) => {
 
 router.get('/todos', async (req, res) => {
     try {
-        let response = await mongoose.model('Usuario').find({});
+        let filtroRank = req.params.filtroRank;
+        let response;
+        if (filtroRank == "true") {
+            response = await mongoose.model('Usuario').find({}).sort({pontos: -1}).limit(5);
+        } else {
+            response = await mongoose.model('Usuario').find({});
+        }
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {
         res.status(400);

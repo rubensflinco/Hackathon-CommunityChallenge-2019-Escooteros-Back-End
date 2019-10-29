@@ -9,13 +9,16 @@ router.use(express.json())
 
 router.post('/autenticar', async (req, res) => {
     let userFbID = req.body.userFbID;
-    let responseFind = await mongoose.model('Usuario').find({ userFbID });
-    responseFind = responseFind[0];
-    if (responseFind.userFbID == userFbID) {
-        // Usario já criado no banco
-        res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
-        return;
-    } else {
+    let responseFind;
+    try {
+        responseFind = await mongoose.model('Usuario').find({ userFbID });
+        responseFind = responseFind[0];
+        if (String(responseFind.userFbID) === String(userFbID)) {
+            // Usario já criado no banco
+            res.json({ 'mensagem': 'OK: Login feito.', 'data': responseFind, 'token': responseFind.token });
+            return;
+        }
+    } catch (error) {
         //  Usuario sem registro no banco
         try {
             let json = req.body;
@@ -62,7 +65,7 @@ router.get('/todos', async (req, res) => {
         let filtroRank = req.params.filtroRank;
         let response;
         if (filtroRank == "true") {
-            response = await mongoose.model('Usuario').find({}).sort({pontos: -1}).limit(5);
+            response = await mongoose.model('Usuario').find({}).sort({ pontos: -1 }).limit(5);
         } else {
             response = await mongoose.model('Usuario').find({});
         }

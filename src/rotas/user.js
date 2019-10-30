@@ -51,8 +51,7 @@ router.post('/criar', async (req, res) => {
 router.get('/unico/:token', async (req, res) => {
     try {
         let token = req.params.token;
-        let response = await mongoose.model('Usuario').find({ token: token });
-        response = response[0];
+        let response = await mongoose.model('Usuario').findOne({ token });
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {
         res.status(400);
@@ -106,7 +105,7 @@ router.post('/ponto', async (req, res) => {
                 return;
         }
 
-        let response = await mongoose.model('Usuario').update({ pontos });
+        let response = await mongoose.model('Usuario').findOne({ token }).update({ pontos });
         try {
             responseFind = await mongoose.model('Usuario').findOne({ token });
         } catch (error) {

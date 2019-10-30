@@ -66,7 +66,7 @@ router.get('/todos', async (req, res) => {
         let response;
         if (filtroRank == "true") {
             response = await mongoose.model('Usuario').find({}).limit(5);
-            response = sortJsonArray(response, 'name','des');
+            response = sortJsonArray(response, 'pontos','des');
         } else {
             response = await mongoose.model('Usuario').find({});
         }

@@ -3,7 +3,8 @@ let connect = require('../functions/connect')
 const mongoose = require('mongoose')
 const router = express.Router()
 const md5 = require('md5');
-
+const sortJsonArray = require('sort-json-array');
+ 
 router.use(express.json())
 
 
@@ -65,7 +66,7 @@ router.get('/todos', async (req, res) => {
         let response;
         if (filtroRank == "true") {
             response = await mongoose.model('Usuario').find({}).limit(5);
-            response.sort(function(a, b){return parseInt(b.pontos) - parseInt(a.pontos)});
+            response = sortJsonArray(response, 'name','des');
         } else {
             response = await mongoose.model('Usuario').find({});
         }

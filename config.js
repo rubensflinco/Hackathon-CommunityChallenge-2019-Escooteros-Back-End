@@ -1,9 +1,9 @@
 let config = {
     mongodb: {
-        host: 'cluster0-c5suq.mongodb.net',
+        host: 'ds241268.mlab.com:41268',
         user: 'admin',
-        pass: 'admin',
-        collection: 'db'
+        pass: 'pyqRU4rgz3GSJY-',
+        db: 'escooteros'
     }
 }
 

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('../../config');
-const MONGO_URL = `mongodb+srv://${config.mongodb.user}:${config.mongodb.pass}@${config.mongodb.host}/${config.mongodb.collection}?retryWrites=true&w=majority`;
+const MONGO_URL = `mongodb+srv://${config.mongodb.user}:${config.mongodb.pass}@${config.mongodb.host}/${config.mongodb.db}?retryWrites=true&w=majority`;
 
 
 function connect () {

@@ -22,7 +22,7 @@ router.post('/autenticar', async (req, res) => {
         //  Usuario sem registro no banco
         try {
             let json = req.body;
-            json.token = md5(Math.random());
+            json.token = md5(Math.floor(Math.random() * 99999));
             let response = await mongoose.model('Usuario').create(json);
             res.json({ 'mensagem': 'OK: Cadastro e login feito.', 'data': response, 'token': response.token });
             return;
@@ -39,7 +39,7 @@ router.post('/autenticar', async (req, res) => {
 router.post('/criar', async (req, res) => {
     try {
         let json = req.body;
-        json.token = md5(Math.random());
+        json.token = md5(Math.floor(Math.random() * 99999));
         let response = await mongoose.model('Usuario').create(json);
         res.json({ 'mensagem': 'OK', 'data': response });
     } catch (error) {

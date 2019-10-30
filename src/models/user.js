@@ -22,8 +22,7 @@ const UsuarioSchema = new Schema({
     },
     apelido: {
         type: String, 
-        required: true,
-        unique: true
+        required: true
     },
     foto: {
         type: String, 

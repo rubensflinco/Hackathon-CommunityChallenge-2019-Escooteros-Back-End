@@ -62,11 +62,10 @@ router.get('/unico/:token', async (req, res) => {
 
 router.get('/todos', async (req, res) => {
     try {
-        let filtroRank = req.params.filtroRank;
+        let filtroRank = req.param('filtroRank');
         let response;
         if (filtroRank == "true") {
-            response = await mongoose.model('Usuario').find({}).limit(5);
-            response = sortJsonArray(response, 'pontos','asc');
+            response = await mongoose.model('Usuario').find({}).sort({pontos: 1}).limit(5);
         } else {
             response = await mongoose.model('Usuario').find({});
         }

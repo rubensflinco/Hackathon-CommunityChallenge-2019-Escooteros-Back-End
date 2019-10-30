@@ -84,7 +84,7 @@ router.post('/ponto', async (req, res) => {
         let pontos, responseFind;
 
         try {
-            responseFind = await mongoose.model('Usuario').findOne({token});
+            responseFind = await mongoose.model('Usuario').findOne({ token });
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });
@@ -108,8 +108,7 @@ router.post('/ponto', async (req, res) => {
 
         let response = await mongoose.model('Usuario').update({ pontos });
         try {
-            responseFind = await mongoose.model('Usuario').find({ token });
-            responseFind = responseFind[0];
+            responseFind = await mongoose.model('Usuario').findOne({ token });
         } catch (error) {
             res.status(400);
             res.json({ 'mensagem': 'ERRO: Todo mundo um dia vai errar!', 'data': error });

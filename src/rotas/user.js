@@ -64,7 +64,8 @@ router.get('/todos', async (req, res) => {
         let filtroRank = req.params.filtroRank;
         let response;
         if (filtroRank == "true") {
-            response = await mongoose.model('Usuario').find({}).sort({ pontos: -1, createdAt: -1 }).limit(5);
+            response = await mongoose.model('Usuario').find({}).limit(5);
+            response.sort(function(a, b){return b.pontos - a.pontos});
         } else {
             response = await mongoose.model('Usuario').find({});
         }

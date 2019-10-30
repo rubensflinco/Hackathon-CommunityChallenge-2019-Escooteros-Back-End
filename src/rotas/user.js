@@ -3,7 +3,6 @@ let connect = require('../functions/connect')
 const mongoose = require('mongoose')
 const router = express.Router()
 const md5 = require('md5');
-const sortJsonArray = require('sort-json-array');
  
 router.use(express.json())
 

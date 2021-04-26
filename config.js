@@ -1,10 +1,10 @@
 let config = {
     mongodb: {
-        host: 'escooteros-banco-de-dad.04gf8.mongodb.net',
+        host: 'escooteros-banco-de-dad-shard-00-00.04gf8.mongodb.net:27017,escooteros-banco-de-dad-shard-00-01.04gf8.mongodb.net:27017,escooteros-banco-de-dad-shard-00-02.04gf8.mongodb.net:27017',
         user: 'admin',
         pass: '4GUwOUWUFh9VyYSM',
         db: 'escooteros',
-        urlAdd: '?retryWrites=true&w=majority'
+        urlAdd: '?ssl=true&replicaSet=atlas-31zhma-shard-0&authSource=admin&retryWrites=true&w=majority'
     }
 }
 

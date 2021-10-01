@@ -11,8 +11,8 @@ const usuarioModel = require('./src/models/user');
 
 // Cors use produção Heroku
 var whitelist = [
-    'https://jotinhabr.github.io',
-    'http://jotinhabr.github.io',
+    'https://rubensflinco.github.io',
+    'http://rubensflinco.github.io',
     'https://localhost:8081', 
     'http://localhost:8081', 
     'https://localhost', 
